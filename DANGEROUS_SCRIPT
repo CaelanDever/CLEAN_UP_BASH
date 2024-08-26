@@ -112,7 +112,7 @@ cleanup_temp_files() {
     log_message "Temporary files starting with 'temp' have been cleaned up."
 }
 
-# 3. Formatting a mounted partition as a disk check
+# Formatting a mounted partition as a disk check
 check_and_format_disk() {
     # Ensure that the disk is properly formatted for best performance
     mount_point="/mnt/important"
