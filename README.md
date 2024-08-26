@@ -4,4 +4,4 @@ there's dangerous code in the bash script.....clean it up to something safe i ca
 
 I dont want any dangerous commands, syntax errors...or unnecessary processes
 
-make sure to test the script in your enviroment before sending me the Pull Request, reason is because ill test it on my enviroment. if it destroys my enviroment....itll be an automatic fail
+make sure to test the script in your enviroment before sending me the Pull Request, reason is because ill test it on my enviroment. if it destroys my enviroment....itll be an automatic fail of the whole assessment
