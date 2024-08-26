@@ -9,3 +9,5 @@ make sure to test the script in your enviroment before sending me the Pull Reque
 ill also scan for dangerous code within the script...if i see it, itll also be an automatic fail of the whole assessment
 
 reason is, you can fuck up a whole company if you're not careful....
+
+SO INVESTIGATE....I DONT WANT TO SEE ONE DANGEROUS CODE LEFT IN THE SCRIPT. CLEAN IT UP
